@@ -274,7 +274,7 @@ describe "A spy, when configured to call through", ->
     });
   });
 
-  describe("A spec", function() {
+  xdescribe("A spec", function() {
     it("is just a function, so it can contain any code", function() {
       var foo;
       foo = 0;

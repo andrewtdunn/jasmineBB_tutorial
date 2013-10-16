@@ -51,3 +51,11 @@ describe "Restaurants view", ->
 	it "should render when an element is removed from the collection", ->
 		@restaurants_collection.pop()
 		expect($(invisible_table).children.length).toEqual 2
+
+	it "should remove the restaurant when clicking the "
+
+
+
+
+
+

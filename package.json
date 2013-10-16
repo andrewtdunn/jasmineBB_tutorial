@@ -1,8 +1,8 @@
 {
-	"name":"omm-mobile"
+	"name":"jasmine_tutorial"
 ,	"version":"0.0.1"
-,	"private":true
+,	"description":"web for mobile implementation in marionette/jquery mobile"
 ,	"dependencies": {
-		"connect":"2.7.0"
+		"express":"~3.1.0"
 	}
 }

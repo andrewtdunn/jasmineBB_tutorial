@@ -48,10 +48,11 @@
       });
       return expect($(invisible_table).children().length).toEqual(4);
     });
-    return it("should render when an element is removed from the collection", function() {
+    it("should render when an element is removed from the collection", function() {
       this.restaurants_collection.pop();
       return expect($(invisible_table).children.length).toEqual(2);
     });
+    return it("should remove the restaurant when clicking the ");
   });
 
 }).call(this);

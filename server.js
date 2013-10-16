@@ -13,3 +13,12 @@ app = connect()
 http.createServer(app).listen(8082, function(){
 	console.log('Running on http://localhost:8082');
 });
+ess.errorHandler({ dumpExceptions: true, showStack: true }));
+});
+
+// Start server
+var port = 8000;
+app.listen(port, function(){
+	console.log('Express server listening on port %d in %s mode', port, app.settings.env);
+});
+

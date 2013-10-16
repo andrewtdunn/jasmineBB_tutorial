@@ -9,12 +9,17 @@
     __extends(RestaurantsView, _super);
 
     function RestaurantsView() {
+      this.removeRestaurant = __bind(this.removeRestaurant, this);
       this.render = __bind(this.render, this);
       _ref = RestaurantsView.__super__.constructor.apply(this, arguments);
       return _ref;
     }
 
     RestaurantsView.prototype.template = Hogan.compile($('#restaurant-template').html());
+
+    RestaurantsView.prototype.events = {
+      'click .remove': 'removeRestaurant'
+    };
 
     RestaurantsView.prototype.initialize = function() {
       this.render(this.collection);
@@ -35,6 +40,13 @@
         })(restaurant));
       }
       return _results;
+    };
+
+    RestaurantsView.prototype.removeRestaurant = function(evt) {
+      var id, model;
+      id = evt.target.id;
+      model = this.collection.get(id);
+      return this.collection.remove(model);
     };
 
     return RestaurantsView;

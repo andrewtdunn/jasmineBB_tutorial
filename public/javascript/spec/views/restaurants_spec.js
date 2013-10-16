@@ -52,7 +52,14 @@
       this.restaurants_collection.pop();
       return expect($(invisible_table).children.length).toEqual(2);
     });
-    return it("should remove the restaurant when clicking the ");
+    return it("should remove the restaurant when clicking the remove icon", function() {
+      var remove_button, removed_restaurant;
+      remove_button = $('.remove', $(invisible_table))[0];
+      $(remove_button).trigger('click');
+      removed_restaurant = this.restaurants_collection.get(remove_button.id);
+      expect(this.restaurants_collection.length).toEqual(2);
+      return expect(this.restaurants_collection.models).not.toContain(removed_restaurant);
+    });
   });
 
 }).call(this);

@@ -24,6 +24,8 @@
     <script type="text/javascript" src="/javascript/app.js"></script>
     <script type="text/javascript" src="/javascript/models/restaurant.js"></script>
     <script type="text/javascript" src="/javascript/views/restaurants.js"></script>
+    <script type="text/javascript" src="/javascript/views/restaurant_form.js"></script>
+
   </head>
   <body>
     <script type="text/javascript">
@@ -52,6 +54,10 @@
         restaurants_view = new Gourmet.Views.RestaurantsView({
           collection: restaurants,
           el: '#restaurants tbody'
+        })
+        restaurant_form_view = new Gourmet.Views.RestaurantForm({
+          el: "#restaurant-form",
+          collection: restaurants
         })
        });    
     </script>

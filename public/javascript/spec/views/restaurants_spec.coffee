@@ -52,7 +52,13 @@ describe "Restaurants view", ->
 		@restaurants_collection.pop()
 		expect($(invisible_table).children.length).toEqual 2
 
-	it "should remove the restaurant when clicking the "
+	it "should remove the restaurant when clicking the remove icon", ->
+		remove_button = $('.remove', $(invisible_table))[0]
+		$(remove_button).trigger 'click'
+		removed_restaurant = @restaurants_collection.get remove_button.id
+		expect(@restaurants_collection.length).toEqual 2
+		expect(@restaurants_collection.models).not.toContain removed_restaurant
+
 
 
 

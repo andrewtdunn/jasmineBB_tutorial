@@ -20,7 +20,18 @@ describe "Restaurant Form", ->
 
 	describe "Restaurant Form", ->
 
+		validAttrs = 
+			name: 'Panjab'
+			postcode: '123456'
+			rating: '5'
+
+		invalidAttrs = 
+			name: ''
+			postcode: '123456'
+			rating: '5'
+
 		beforeEach ->
+			@server = sinon.fakeServer.create()
 			@serialized_data = [
 				{
 					name: 'restaurant[name]',
@@ -38,43 +49,31 @@ describe "Restaurant Form", ->
 			spyOn(@restaurant_form.$el, 'serializeArray').andReturn @serialized_data
 
 		it "should parse form data", ->
-			expect(@restaurant_form.parseFormData(@serialized_data)).toEqual
-				name: 'Panjab'
-				rating: '5'
-				postcode: '123456'
+			expect(@restaurant_form.parseFormData(@serialized_data)).toEqual validAttrs
 
 		it "should add a restaraunt when form data is valid", ->
-			spyOn(@restaurant_form, 'parseFormData').andReturn 
-				name: 'Panjab'
-				rating: '5'
-				postcode: '123456'
+			spyOn(@restaurant_form, 'parseFormData').andReturn validAttrs
 			@restaurant_form.save() # we mock the click by calling the method
 			expect(@restaurant_form.collection.length).toEqual 1
 
 		it "should not add a restaraunt when form data is invalid", ->
-			spyOn(@restaurant_form, 'parseFormData').andReturn 
-				name: ''
-				rating: '5'
-				postcode: '123456'
+			spyOn(@restaurant_form, 'parseFormData').andReturn invalidAttrs
 			@restaurant_form.save() # we mock the click by calling the method
 			expect(@restaurant_form.collection.length).toEqual 0
 
+		it "should send an ajax request to the server", ->
+			spyOn(@restaurant_form, 'parseFormData').andReturn validAttrs
+			@restaurant_form.save()
+			expect(@server.requests.length).toEqual 1
+			expect(@server.requests[0].method).toEqual('POST')
+			expect(@server.requests[0].requestBody).toEqual JSON.stringify(validAttrs)
+
 		it "should show validation errors when data is invalid", ->
 			console.log "final"
-			spyOn(@restaurant_form, 'parseFormData').andReturn
-				name: ''
-				rating: '5'
-				postcode: '123456'
+			spyOn(@restaurant_form, 'parseFormData').andReturn invalidAttrs
 			@restaurant_form.save() # we mock the click by calling the method
 			#expect($('.error', $(@invisible_form)).length).toEqual 1 # $ selector not working...
 			expect($('.error').length).toEqual 1
-
-
-
-
-
-
-
 
 
 

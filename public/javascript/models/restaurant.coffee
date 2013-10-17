@@ -1,5 +1,7 @@
 class Gourmet.Models.Restaurant extends Backbone.Model
 
+	urlRoot: '/restaurants'
+
 	defaults: 
 		name: null
 		postcode: null
@@ -16,6 +18,14 @@ class Gourmet.Models.Restaurant extends Backbone.Model
 			min: 1
 			max: 5
 
+	removeRestaurant: (evt) =>
+		id = evt.target.id
+		model = @collection.get id
+		@collection.remove model
+		model.destroy()
+
 class Gourmet.Collections.RestaurantsCollection extends Backbone.Collection
+
+	urlRoot: '/restaurants'
 
 	model: Gourmet.Models.Restaurant

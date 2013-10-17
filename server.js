@@ -1,33 +1,17 @@
-// Module dependencies
-var application_root = __dirname, 
-	express = require( 'express' ), // Web framework
-	path = require( 'path' ); // Utilities for Dealing with filepaths
-	//mongoose = require( 'mongoose' ); // MongoDB integration
+var connect = require('connect')
+var connect = require('connect')
+,	http = require('http')
+, 	app
+;
 
-// Create server
-var app = express();
+app = connect()
+.use(connect.static('public'))
+//.use('/js/lib/', connect.static('node_modules/requirejs/'))
+.use('node_modules/', connect.static('node_modules'))
+// for testing, possibly not necessary
+//.use('/test', connect.static('public'))
+;
 
-// Configure server
-app.configure( function() {
-	// parse request body and populate request.body
-	app.use( express.bodyParser() );
-
-	// checks request.body for HTTP method overrides
-	app.use( express.methodOverride() );
-
-	// perform route lookup based on URL and HTTP method
-	app.use( app.router );
-
-	// where to server static content
-	app.use( express.static( path.join( application_root, 'public' ) ) );
-
-	// Show all errors in development
-	app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
+http.createServer(app).listen(8082, function(){
+	console.log('Running on http://localhost:8082');
 });
-
-// Start server
-var port = 8000;
-app.listen(port, function(){
-	console.log('Express server listening on port %d in %s mode', port, app.settings.env);
-});
-

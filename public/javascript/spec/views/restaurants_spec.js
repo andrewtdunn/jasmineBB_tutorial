@@ -64,42 +64,26 @@
       expect(this.restaurants_collection.length).toEqual(2);
       return expect(this.restaurants_collection.models).not.toContain(removed_restaurant);
     });
-    it("should have default attributes", function() {
-      expect(ritz.attributes.name).toBeDefined();
-      expect(ritz.attributes.postcode).toBeDefined();
-      return expect(ritz.attributes.rating).toBeDefined();
-    });
-    it("should have the right url", function() {
-      return expect(ritz.urlRoot).toEqual('/restaurants');
-    });
-    it("should use the Restaurant model", function() {
-      return expect(restaurants.model).toEqual(Gourmet.Models.Restaurant);
-    });
-    it("should have the right url", function() {
-      return expect(restaurants.url).toEqual('/restaurants');
-    });
     it("should remove a restaurant from the collection", function() {
-      ({
-        evt: {
-          target: {
-            id: 1
-          }
+      var evt;
+      evt = {
+        target: {
+          id: 1
         }
-      });
+      };
       this.restaurants_view.removeRestaurant(evt);
       return expect(this.restaurants_collection.length).toEqual(2);
     });
     return it("should send an ajax request to delete the restaurant", function() {
-      ({
-        evt: {
-          target: {
-            id: 1
-          }
+      var evt;
+      evt = {
+        target: {
+          id: 1
         }
-      });
+      };
       this.restaurants_view.removeRestaurant(evt);
       expect(this.server.requests.length).toEqual(1);
-      expect(this.server.requests[0].methods).toEqual('DELETE');
+      expect(this.server.requests[0].method).toEqual('DELETE');
       return expect(this.server.requests[0].url).toEqual('/restaurants/1');
     });
   });

@@ -16,6 +16,16 @@ describe "Restaurant Model", ->
 			expect(ritz.attributes.postcode).toBeDefined()
 			expect(ritz.attributes.rating).toBeDefined()
 
+		it "should have default attributes", ->
+		expect(ritz.attributes.name).toBeDefined()
+		expect(ritz.attributes.postcode).toBeDefined()
+		expect(ritz.attributes.rating).toBeDefined()
+
+		it "should have the right url", ->
+			expect(ritz.urlRoot).toEqual '/restaurants'
+
+	
+
 	describe "Validations", ->
 
 		attrs = {}
@@ -55,6 +65,12 @@ describe "Restaurant Model", ->
 
 		it "should use the Restaurant model", ->
 			expect(restaurants.model).toEqual Gourmet.Models.Restaurant
+
+		it "should use the Restaurant model", ->
+			expect(restaurants.model).toEqual Gourmet.Models.Restaurant
+
+		it "should have the right url", ->
+			expect(restaurants.url).toEqual '/restaurants'
 
 
 

@@ -63,34 +63,19 @@ describe "Restaurants view", ->
 		expect(@restaurants_collection.length).toEqual 2
 		expect(@restaurants_collection.models).not.toContain removed_restaurant
 
-	it "should have default attributes", ->
-		expect(ritz.attributes.name).toBeDefined()
-		expect(ritz.attributes.postcode).toBeDefined()
-		expect(ritz.attributes.rating).toBeDefined()
-
-	it "should have the right url", ->
-		expect(ritz.urlRoot).toEqual '/restaurants'
-
-	it "should use the Restaurant model", ->
-		expect(restaurants.model).toEqual Gourmet.Models.Restaurant
-
-	it "should have the right url", ->
-		expect(restaurants.url).toEqual '/restaurants'
-
-
 	it "should remove a restaurant from the collection", ->
-		evt: { target: { id: 1 } }
+		evt = { target: { id: 1 } }
 		@restaurants_view.removeRestaurant evt
 		expect( @restaurants_collection.length ).toEqual 2
 
 	it "should send an ajax request to delete the restaurant", ->
-		evt: { target: { id: 1} }
+		evt = { target: { id: 1} }
 		@restaurants_view.removeRestaurant evt
 		expect(@server.requests.length).toEqual 1
-		expect(@server.requests[0].methods).toEqual('DELETE')
+		expect(@server.requests[0].method).toEqual('DELETE')
 		expect(@server.requests[0].url).toEqual('/restaurants/1')
 
-	
+
 
 
 

@@ -41,6 +41,8 @@
       var id, model;
       id = evt.target.id;
       model = this.collection.get(id);
+      console.log("removing model: ");
+      console.log(model);
       this.collection.remove(model);
       return model.destroy();
     };
@@ -57,7 +59,7 @@
       return _ref1;
     }
 
-    RestaurantsCollection.prototype.urlRoot = '/restaurants';
+    RestaurantsCollection.prototype.url = '/restaurants';
 
     RestaurantsCollection.prototype.model = Gourmet.Models.Restaurant;
 

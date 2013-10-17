@@ -21,11 +21,13 @@ class Gourmet.Models.Restaurant extends Backbone.Model
 	removeRestaurant: (evt) =>
 		id = evt.target.id
 		model = @collection.get id
+		console.log "removing model: "
+		console.log model
 		@collection.remove model
 		model.destroy()
 
 class Gourmet.Collections.RestaurantsCollection extends Backbone.Collection
 
-	urlRoot: '/restaurants'
+	url: '/restaurants'
 
 	model: Gourmet.Models.Restaurant

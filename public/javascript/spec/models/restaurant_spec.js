@@ -16,7 +16,7 @@
         return expect(ritz.urlRoot).toEqual('/restaurants');
       });
     });
-    describe("Validations", function() {
+    return describe("Validations", function() {
       var attrs;
       attrs = {};
       beforeEach(function() {
@@ -50,18 +50,19 @@
         return attrs['rating'] = 6;
       });
     });
-    return describe("Restaurants collection", function() {
-      var restaurants;
-      restaurants = new Gourmet.Collections.RestaurantsCollection;
-      it("should exist", function() {
-        return expect(Gourmet.Collections.RestaurantsCollection).toBeDefined();
-      });
-      it("should use the Restaurant model", function() {
-        return expect(restaurants.model).toEqual(Gourmet.Models.Restaurant);
-      });
-      return it("should have the right url", function() {
-        return expect(restaurants.url).toEqual('/restaurants');
-      });
+  });
+
+  describe("Restaurants collection", function() {
+    var restaurants;
+    restaurants = new Gourmet.Collections.RestaurantsCollection;
+    it("should exist", function() {
+      return expect(Gourmet.Collections.RestaurantsCollection).toBeDefined();
+    });
+    it("should use the Restaurant model", function() {
+      return expect(restaurants.model).toEqual(Gourmet.Models.Restaurant);
+    });
+    return it("should have the right url", function() {
+      return expect(restaurants.url).toEqual('/restaurants');
     });
   });
 

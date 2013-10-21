@@ -54,47 +54,15 @@ describe "Restaurant Model", ->
 		it "should not accept a rating > 5", ->
 			attrs['rating'] = 6
 
-	describe "Restaurants collection", ->
+describe "Restaurants collection", ->
 
-		restaurants = new Gourmet.Collections.RestaurantsCollection
+	restaurants = new Gourmet.Collections.RestaurantsCollection
 
-		it "should exist", ->
-			expect(Gourmet.Collections.RestaurantsCollection).toBeDefined()
+	it "should exist", ->
+		expect(Gourmet.Collections.RestaurantsCollection).toBeDefined()
 
-		it "should use the Restaurant model", ->
-			expect(restaurants.model).toEqual Gourmet.Models.Restaurant
+	it "should use the Restaurant model", ->
+		expect(restaurants.model).toEqual Gourmet.Models.Restaurant
 
-		it "should have the right url", ->
-			expect(restaurants.url).toEqual '/restaurants'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	it "should have the right url", ->
+		expect(restaurants.url).toEqual '/restaurants'

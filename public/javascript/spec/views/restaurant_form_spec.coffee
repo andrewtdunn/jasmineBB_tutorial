@@ -30,6 +30,16 @@ describe "Restaurant Form", ->
 			postcode: '123456'
 			rating: '5'
 
+		validAttrs = 
+			name: 'Panjab'
+			postcode: '123456'
+			rating: '5'
+
+		invalidAttrs = 
+			name: ''
+			postcode: '123456'
+			rating: '5'
+
 		beforeEach ->
 			@server = sinon.fakeServer.create()
 			@serialized_data = [

@@ -31,6 +31,16 @@
         postcode: '123456',
         rating: '5'
       };
+      validAttrs = {
+        name: 'Panjab',
+        postcode: '123456',
+        rating: '5'
+      };
+      invalidAttrs = {
+        name: '',
+        postcode: '123456',
+        rating: '5'
+      };
       beforeEach(function() {
         this.server = sinon.fakeServer.create();
         this.serialized_data = [

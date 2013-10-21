@@ -7,7 +7,7 @@ class Gourmet.Views.RestaurantForm extends Backbone.View
 		data = @parseFormData(@$el.serializeArray())
 		new_restaurant = new Gourmet.Models.Restaurant data
 		errors = new_restaurant.validate(new_restaurant.attributes)
-		if errors then @handleErrors(errors) else @collection.add new_restaurant
+		if errors then @handleErrors(errors) else @collection.create new_restaurant
 
 	parseFormData: (serialized_array) ->
 		_.reduce serialized_array, @parseFormField, {}
@@ -27,8 +27,4 @@ class Gourmet.Views.RestaurantForm extends Backbone.View
 				console.log input.closest('.control-group')
 				input.closest('.control-group').addClass 'error'
 
-	save: ->
-		data = @parseFormData(@$el.serializeArray())
-		new_restaurant = new Gourmet.Models.Restaurant data
-		errors = new_restaurant.validate(new_restaurant.attributes)
-		if errors then @handleErrors(errors) else @collection.create new_restaurant
+	

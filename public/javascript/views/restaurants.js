@@ -44,6 +44,8 @@
 
     RestaurantsView.prototype.removeRestaurant = function(evt) {
       var id, model;
+      console.log(this.collection);
+      console.log("remove " + evt.target.id);
       id = evt.target.id;
       model = this.collection.get(id);
       this.collection.remove(model);

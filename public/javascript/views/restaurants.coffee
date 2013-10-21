@@ -17,6 +17,8 @@ class Gourmet.Views.RestaurantsView extends Backbone.View
 				@$el.append @template.render(restaurant.toJSON())
 
 	removeRestaurant: (evt) =>
+		console.log @collection
+		console.log "remove "+evt.target.id
 		id = evt.target.id
 		model = @collection.get id
 		@collection.remove model

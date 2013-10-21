@@ -24,7 +24,7 @@
       if (errors) {
         return this.handleErrors(errors);
       } else {
-        return this.collection.add(new_restaurant);
+        return this.collection.create(new_restaurant);
       }
     };
 
@@ -56,18 +56,6 @@
         })(key));
       }
       return _results;
-    };
-
-    RestaurantForm.prototype.save = function() {
-      var data, errors, new_restaurant;
-      data = this.parseFormData(this.$el.serializeArray());
-      new_restaurant = new Gourmet.Models.Restaurant(data);
-      errors = new_restaurant.validate(new_restaurant.attributes);
-      if (errors) {
-        return this.handleErrors(errors);
-      } else {
-        return this.collection.create(new_restaurant);
-      }
     };
 
     return RestaurantForm;

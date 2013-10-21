@@ -19,8 +19,20 @@
     it("should have a collection", function() {
       return expect(this.restaurant_form.collection).toEqual(new Gourmet.Collections.RestaurantsCollection);
     });
-    return describe("Restaurant Form", function() {
+    return describe("Form Submit", function() {
+      var invalidAttrs, validAttrs;
+      validAttrs = {
+        name: 'Panjab',
+        postcode: '123456',
+        rating: '5'
+      };
+      invalidAttrs = {
+        name: '',
+        postcode: '123456',
+        rating: '5'
+      };
       beforeEach(function() {
+        this.server = sinon.fakeServer.create();
         this.serialized_data = [
           {
             name: 'restaurant[name]',
@@ -36,37 +48,28 @@
         return spyOn(this.restaurant_form.$el, 'serializeArray').andReturn(this.serialized_data);
       });
       it("should parse form data", function() {
-        return expect(this.restaurant_form.parseFormData(this.serialized_data)).toEqual({
-          name: 'Panjab',
-          rating: '5',
-          postcode: '123456'
-        });
+        return expect(this.restaurant_form.parseFormData(this.serialized_data)).toEqual(validAttrs);
       });
       it("should add a restaraunt when form data is valid", function() {
-        spyOn(this.restaurant_form, 'parseFormData').andReturn({
-          name: 'Panjab',
-          rating: '5',
-          postcode: '123456'
-        });
+        spyOn(this.restaurant_form, 'parseFormData').andReturn(validAttrs);
         this.restaurant_form.save();
         return expect(this.restaurant_form.collection.length).toEqual(1);
       });
       it("should not add a restaraunt when form data is invalid", function() {
-        spyOn(this.restaurant_form, 'parseFormData').andReturn({
-          name: '',
-          rating: '5',
-          postcode: '123456'
-        });
+        spyOn(this.restaurant_form, 'parseFormData').andReturn(invalidAttrs);
         this.restaurant_form.save();
         return expect(this.restaurant_form.collection.length).toEqual(0);
       });
+      it("should send an ajax request to the server", function() {
+        spyOn(this.restaurant_form, 'parseFormData').andReturn(validAttrs);
+        this.restaurant_form.save();
+        expect(this.server.requests.length).toEqual(1);
+        expect(this.server.requests[0].method).toEqual('POST');
+        return expect(this.server.requests[0].requestBody).toEqual(JSON.stringify(validAttrs));
+      });
       return it("should show validation errors when data is invalid", function() {
         console.log("final");
-        spyOn(this.restaurant_form, 'parseFormData').andReturn({
-          name: '',
-          rating: '5',
-          postcode: '123456'
-        });
+        spyOn(this.restaurant_form, 'parseFormData').andReturn(invalidAttrs);
         this.restaurant_form.save();
         return expect($('.error').length).toEqual(1);
       });

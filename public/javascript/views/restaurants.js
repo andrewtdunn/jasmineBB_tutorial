@@ -46,7 +46,8 @@
       var id, model;
       id = evt.target.id;
       model = this.collection.get(id);
-      return this.collection.remove(model);
+      this.collection.remove(model);
+      return model.destroy();
     };
 
     return RestaurantsView;

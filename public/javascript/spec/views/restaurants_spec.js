@@ -17,16 +17,20 @@
         id: 2,
         name: 'Waldorf',
         postcode: 'WE43F2',
-        rating: 5
+        rating: 4
       }
     ];
     invisible_table = document.createElement('table');
     beforeEach(function() {
+      this.server = sinon.fakeServer.create();
       this.restaurants_collection = new Gourmet.Collections.RestaurantsCollection(restaurants_data);
       return this.restaurants_view = new Gourmet.Views.RestaurantsView({
         collection: this.restaurants_collection,
         el: invisible_table
       });
+    });
+    afterEach(function() {
+      return this.server.restore();
     });
     it("should be defined", function() {
       return expect(Gourmet.Views.RestaurantsView).toBeDefined();
@@ -52,13 +56,35 @@
       this.restaurants_collection.pop();
       return expect($(invisible_table).children.length).toEqual(2);
     });
-    return it("should remove the restaurant when clicking the remove icon", function() {
+    it("should remove the restaurant when clicking the remove icon", function() {
       var remove_button, removed_restaurant;
       remove_button = $('.remove', $(invisible_table))[0];
       $(remove_button).trigger('click');
       removed_restaurant = this.restaurants_collection.get(remove_button.id);
       expect(this.restaurants_collection.length).toEqual(2);
       return expect(this.restaurants_collection.models).not.toContain(removed_restaurant);
+    });
+    it("should remove a restaurant from the collection", function() {
+      var evt;
+      evt = {
+        target: {
+          id: 1
+        }
+      };
+      this.restaurants_view.removeRestaurant(evt);
+      return expect(this.restaurants_collection.length).toEqual(2);
+    });
+    return it("should send an ajax request to delete the restaurant", function() {
+      var evt;
+      evt = {
+        target: {
+          id: 1
+        }
+      };
+      this.restaurants_view.removeRestaurant(evt);
+      expect(this.server.requests.length).toEqual(1);
+      expect(this.server.requests[0].method).toEqual('DELETE');
+      return expect(this.server.requests[0].url).toEqual('/restaurants/1');
     });
   });
 

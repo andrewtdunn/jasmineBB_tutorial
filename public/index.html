@@ -19,6 +19,8 @@
     <script type="text/javascript" src="/javascript/vendor/jquery.min.js"></script>
     <script type="text/javascript" src="/javascript/vendor/underscore.min.js"></script>
     <script type="text/javascript" src="/javascript/vendor/backbone.min.js"></script>
+    <script type="text/javascript" src="/javascript/vendor/backbone_rails_sync.js"></script>
+    <script type="text/javascript" src="/javascript/vendor/sinon.js"></script>
     <script type="text/javascript" src="/javascript/vendor/backbone-validations.js"></script>
     <script type="text/javascript "src="/javascript/vendor/hogan.js"></script>
     <script type="text/javascript" src="/javascript/app.js"></script>
@@ -75,17 +77,17 @@
             <form action="#" class="well form-horizontal" id="restaurant-form">
               <div class="control-group">
                 <label for="restaurant_name">Name</label>
-                <input type="text" name="restautrant[name]" id="restaurant_name" />
+                <input type="text" name="restaurant[name]" id="restaurant_name" />
                 <span class="help-block">Required</span>
               </div>
               <div class="control-group">
                 <label for="restaurant_rating">Rating</label>
-                <input type="text" name="restautrant[rating]" id="restaurant_rating" />
+                <input type="text" name="restaurant[rating]" id="restaurant_rating" />
                 <span class="help-block">Required, only a number between 1 and 5</span>
               </div>
               <div class="control-group">
                 <label for="restaurant_postcode">Postcode</label>
-                <input type="text" name="restautrant[postcode]" id="restaurant_postcode" />
+                <input type="text" name="restaurant[postcode]" id="restaurant_postcode" />
                 <span class="help-block">Required</span>
               </div>
               <input type="button" class="btn btn-primary" value="Save" id="save" />

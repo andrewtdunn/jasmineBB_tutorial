@@ -20,3 +20,4 @@ class Gourmet.Views.RestaurantsView extends Backbone.View
 		id = evt.target.id
 		model = @collection.get id
 		@collection.remove model
+		model.destroy()
